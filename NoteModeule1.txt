@@ -1,0 +1,76 @@
+-------------------------------------
+Data & Information
+
+-data organized way te save rakha ke information bole.
+
+Data: 
+    1. Unorganized, unprocessed facts without context
+    2. not useful
+    3. Lacks of contextor meaning
+    4. Input for Analsis
+Information: 
+    1. organized, processed facts with context
+    2. useful, decision making
+    3. has context, purpose
+    4. Output for Analsis
+
+-----------------
+DataBase
+-data rakhar system (keep, manage, recreate)
+Different type of database:
+    1. Relational database
+    2. Non Relational database
+    3. Graph database
+    4. Centralized Database
+    5. Distributed Database
+    6. Cloud Database 
+------------------
+Table, Record, Field, Value:
+MySQL -> relational database system
+Table:(table akare (excel ar moto))
+Field: table ah column, row ke field bole
+record: Full column, row ke record bole
+Value: row,cloumn ar box ah ja thake tai Value
+--------------------------------
+DBMS, RDBMS
+- Database management system
+- Relational Database management system
+DBMS:
+    data(information in organized),
+    user(Amra sobai), 
+    hardware(computer,memory card,dvd,pendrive, etc), 
+    software, 
+    processing unit,
+
+    Advantage:
+        - organized, keep,recreate, manage, 
+        - fast access
+        - parallel accessing
+
+RDBMS:
+    Mostly uses
+    DBMS
+------------------------------------
+Key-> Primary Key, Composite Primary Key, Forign Key
+
+Key(Chabi): 
+    - name dia kono kichu bahir kora
+Primary Key:
+    - key(name or roll etc) are unique
+    if we create a unique name by one field its called Composite Primary key
+Composite Primary Key:
+    - Course (Cse 101, Buet)
+    if we create a unique name by more then one field its called Composite Primary key
+Forign Key:
+    - 
+
+
+Relational:
+    one to one
+    one to many
+    many to many    
+
+
+
+
+

@@ -1,0 +1,83 @@
+>> Joining Table
+    > Join Tables without JOIN Query
+        Example: (TIME BESHI LAGE)--O(M*N)
+            SELECT EMPLOYEES.FIRST_NAME, DEPARTMENTS.DEPARTMENT_NAME
+            FROM EMPLOYEES, DEPARTMENTS
+            WHERE EMPLOYEES.DEPARTMENT_ID = DEPARTMENTS.DEPARTMENT_ID ;
+
+    > Join Table with JOIN Query
+        Example: (BETTER WAY, FASTER) --O(ALMOST M)
+            SELECT EMPLOYEES.FIRST_NAME, DEPARTMENTS.DEPARTMENT_NAME 
+            FROM EMPLOYEES JOIN DEPARTMENTS ON EMPLOYEES.DEPARTMENT_ID = DEPARTMENTS.DEPARTMENT_ID -- BEST WAY
+            -- FROM EMPLOYEES USING (DEPARTMENT_ID)
+
+    > INNER, LEFT, RIGHT, CROSS JOIN
+        -INNER JOIN OR JOIN
+            Like vendiagram in set (A n(intersection) B), small portion aare common.
+            Example:
+                    SELECT EMPLOYEES.FIRST_NAME, DEPARTMENTS.DEPARTMENT_NAME 
+                    FROM EMPLOYEES JOIN DEPARTMENTS ON EMPLOYEES.DEPARTMENT_ID = DEPARTMENTS.DEPARTMENT_ID -- BEST WAY
+
+        -LEFT JOIN
+            in vendiagram in set the left set A, (A n B). output from A which are common and rest are NULL.
+            Example:
+                    SELECT EMPLOYEES.FIRST_NAME, DEPARTMENTS.DEPARTMENT_NAME 
+                    FROM EMPLOYEES LEFT JOIN DEPARTMENTS ON EMPLOYEES.DEPARTMENT_ID = DEPARTMENTS.DEPARTMENT_ID -- BEST WAY
+
+        -RIGHT JOIN
+            in vendiagram in set the right set B, (A n B). output from B which are common and rest are NULL.
+            Example:
+                    SELECT EMPLOYEES.FIRST_NAME, DEPARTMENTS.DEPARTMENT_NAME 
+                    FROM EMPLOYEES RIGHT JOIN DEPARTMENTS ON EMPLOYEES.DEPARTMENT_ID = DEPARTMENTS.DEPARTMENT_ID -- BEST WAY
+
+        -CROSS JOIN
+            in vendiagram in set the right set A and B both, (A n B). output from A and B which are common and rest are NULL.
+            Example:
+                    SELECT EMPLOYEES.FIRST_NAME, DEPARTMENTS.DEPARTMENT_NAME 
+                    FROM EMPLOYEES CROSS JOIN DEPARTMENTS ON EMPLOYEES.DEPARTMENT_ID = DEPARTMENTS.DEPARTMENT_ID -- BEST WAY
+
+        -SELF JOIN
+            one table, join in own table.
+            Example:
+                SELECT
+                FROM Emp AS Emp
+                    JOIN Emp AS m 
+                    ON E.EmpID = M.EmpID
+
+________________________________________________________________________________
+>> ExampleS OF Query Using JOIN (Easy and Advanced)
+
+    Problem: print Employee first name, Manager name
+    Solution:
+        SELECT m.FIRST_NAME AS 'First Name', e.FIRST_NAME AS Manager
+        FROM EMPLOYEES AS e
+            JOIN EMPLOYEES AS m
+            ON e.EMPLOYEE_ID = m.MANAGER_ID
+
+    Problem: Amon department ar name gula show kono , jeshob dept ah kono Employee nai.
+    Solution: 
+        SELECT DEPARTMENTS.DEPARTMENT_NAME AS 'DEPARTMENT NAME'
+        FROM DEPARTMENTS
+            LEFT JOIN EMPLOYEES
+                ON DEPARTMENTS.DEPARTMENT_ID = EMPLOYEES.DEPARTMENT_ID
+        WHERE EMPLOYEES.DEPARTMENT_ID IS NULL;
+
+    Problem: Employee FRIST NAME, SALARY TAR DEPT AR AVG SALARYER CHE KOTO KOM PAI.
+    Solution:
+        SELECT EMPLOYEES.FIRST_NAME AS 'First Name',
+        EMPLOYEES.SALARY AS Salary,
+        ((SELECT AVG(SALARY) FROM EMPLOYEES WHERE DEPARTMENT_ID = EMPLOYEES.DEPARTMENT_ID) - EMPLOYEES.SALARY ) AS SALARY
+        FROM EMPLOYEES
+            JOIN DEPARTMENTS
+                ON EMPLOYEES.DEPARTMENT_ID = DEPARTMENTS.DEPARTMENT_ID;
+
+    Problem: Sei sob dept ar name show koro jader minimum salary 5000 ar BESHI
+    Solution:
+        SELECT DEPARTMENT_NAME
+        FROM EMPLOYEES
+            JOIN DEPARTMENTS
+                ON EMPLOYEES.DEPARTMENT_ID = DEPARTMENTS.DEPARTMENT_ID
+        GROUP BY DEPARTMENT_NAME
+        HAVING MIN(SALARY) > 5000;
+        
+________________________________________________________________________________

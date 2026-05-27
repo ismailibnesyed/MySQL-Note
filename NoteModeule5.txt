@@ -1,0 +1,127 @@
+>> Function
+    UPPER --> abc = ABC, Abc = ABC
+        UPPER('abc')
+    LOWER --> ABC = abc, AbC = abc
+        LOWER('ABC')
+    ABS --> |-2| = 2
+        ABS(-2) = 2
+    DEGREES(pie/2) = 90 -- Input must be in radian
+    RADIANS(90) = pie/2 -- Input must be in degree
+    COS(pie/2) = 0  -- input must be radian, output also give in radian
+    ACOS(1) = 0 -- it is cos inverse
+    SIN(pie/2) = 0  -- input must be radian, output also give in radian
+    ASIN(1) = 0 -- it is sin inverse
+    TAN(pie/2) = 0  -- input must be radian, output also give in radian
+    ATAN(1) = 0 -- it is tan inverse
+
+    CEIL(25.6) = 26
+    FLOOR(25.6) = 25
+
+    10 DIV 2 = 5
+    EXP(10) = __ -- e to the power 10
+    EXP(-10) = __ -- e to the power -10
+    GREATEST(2,4,6,8) = 8
+    LEAST(2,4,6,8) = 2
+
+    LN(10) = ln(10) or log base e of 10
+    LOG = ln(10) or 
+    LOG10(10) = log 10 base of 10 = 1
+    LOG2(10) = log 2 base of 10
+
+    MOD --> 5 MOD 2 = 1
+    PI() --> 3.1416......
+    POW(2,5) --> 2^5
+    RAND() --> give random value between 0 to 1
+    ROUND(12.567,2) = 12.57
+    SQRT(4) = 2
+    TRUNCATE(12.567) = 12.56
+
+-------------------------------------------------------------
+>> Group Function
+    MAX -> See the maximum value from the group
+    MIN -> See the minimum value from the group
+    COUNT -> See how many number in the group
+    SUM -> See the sum from the group
+    AVG -> See the average value from the group
+----------------------------------------------------------
+>> Group by, Having Query
+    GROUP BY:
+        -- department wise group (cse,eee,me,ete,etc)
+        -- country wise (bd, ind, aus)
+        "
+            SELECT MAX(SALARY)
+            FROM EMPLOYEES
+            GROUP BY DEPARTMENT_ID;
+
+            SELECT DEPARTMENT_ID, COUNT(*)
+            FROM EMPLOYEES
+            GROUP BY DEPARTMENT_ID;
+
+
+            SELECT *
+            FROM EMPLOYEES
+            WHERE DEPARTMENT_ID = 20
+        "
+    HAVING :
+        -- Group function ar opore applied condition
+        (WHERE is different condition)
+        "
+            SELECT DEPARTMENT_ID, AVG(SALARY) AS SAL
+            FROM EMPLOYEES
+            WHERE DEPARTMENT_ID != 20
+            GROUP BY DEPARTMENT_ID
+            HAVING SAL > 5000;
+
+            SELECT DEPARTMENT_ID, AVG(SALARY)
+            FROM EMPLOYEES
+            WHERE DEPARTMENT_ID != 20
+            GROUP BY DEPARTMENT_ID
+            HAVING AVG(SALARY) > 5000;
+
+            SELECT DEPARTMENT_ID, MAX(SALARY)
+            FROM EMPLOYEES
+            WHERE DEPARTMENT_ID != 20
+            GROUP BY DEPARTMENT_ID
+            HAVING MAX(SALARY) > 5000;
+
+            SELECT DEPARTMENT_ID, MAX(SALARY)
+            FROM EMPLOYEES
+            WHERE DEPARTMENT_ID != 20
+            GROUP BY DEPARTMENT_ID;
+        "
+
+----------------------------------------------------------
+>>ALTER TABLE Quary
+    Table ar structural change
+    UPDATE, DELETE -> Table ar data gular opore
+    ALTER, DROP -> Table ar structure ar opore
+        new coloum add , column name is 'Email'
+        "
+            ALTER TABLE EMPLOYEE
+            ADD COLUMN Email VARCHAR(50)
+        "
+        delete column,
+        "
+            ALTER TABLE EMPLOYEE
+            DROP COLUMN Salary;
+        "
+        Modify Email column DECIMAL to VARCHAR(50)
+        "
+            ALTER TABLE EMPLOYEE
+            MODIFY COLUMN Email VARCHAR(50);
+        "
+    ADD -> Add data
+--------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+

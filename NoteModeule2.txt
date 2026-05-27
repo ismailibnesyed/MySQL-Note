@@ -1,0 +1,64 @@
+*** Query, SQL
+Query means Findout
+    Different types of query:
+        Select Query (Student)
+        Parameter Query (roll)
+        Crosstab Query (Summary or group)
+        Unmatched Query (the value cannot matched)
+        Action Query (append(add the value), Update(update the value), delete, make table)
+SQL = Structured Query Language
+    Query Language are mainly 3 type:
+        1. QUEL(Query Language)
+        2. QBE(Query By Example)
+        3. SQL
+    SQL are Different types:
+        i. DML (Data Manipulation Language)
+            -select, insert, update, delete
+        ii. DDL (Data Definition Language)
+            - CAD (create(table), append(create new table), drop(delete table))
+        iii. DCL (Data Control Language)
+        iv. DTL (Data Transaction Language)
+-----------------------------
+SQL & MySQL
+-SQL = Structured Query Language
+-MySQL = Relational Database
+--------------------------------------
+Data Types of MySQL
+    -Numeric Type
+        INT (integer) = 1,2 3, thik ache
+        FLOAT, DOUBLE, NUMERIC, DECIMAL (fraction type)
+    -String Type
+        CHAR (character type) --> CHAR(4): 'abcd'
+        VACHAR (variable character) --> VARCHAR(5): 'a' or 'ab' or 'abc' or 'abcd' or 'abcde', we cannot put 'abcdef'
+
+    -Data Time Type
+        DATE : 9 jan 2023, 09-01-2023, 2023
+        TIME : HH:MM:SS 12:30:22
+
+    -Boolean Type (true or false)
+        BOOL  
+        BOOLEAN
+    -Binary Type
+        BINARY(10000) - a binary file of 10 thousand space
+    -Set Type(no repetated value contain)
+        SET(1,2,3,5,7,8) or SET('A','B','C')
+    BIT Type
+        BIT(5) - a bit file of 5 place
+Note: we learn more type when we need
+-----------------------------------------------------
+Create, insert, Update, delete, drop
+Create - make table
+Insert - table existing that entry data
+Update - table exist, data exist, we change the data
+Delete - Table exist, data exit, we delete data
+Drop - Table exist, data exit, we delete table
+
+Table Creation:
+    USE programminghero;
+    CREATE TABLE Student(
+        
+    ):
+        
+
+
+

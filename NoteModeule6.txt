@@ -1,0 +1,84 @@
+>> Subquary
+    -- Subquary in quary
+
+    SELECT(Subquary)
+    FROM(Subquary)
+    WHERE(Subquary)
+
+    Example: (EMPLOYEE_ID = 144 ar kom SALARY kara pai)
+        SELECT *
+        FROM EMPLOYEES
+        WHERE SALARY < (SELECT SALARY
+                        FROM EMPLOYEES
+                        WHERE EMPLOYEE_ID = 144
+                        );
+
+    Example: (HIGHEST SALARY KE PAI)
+        SELECT *
+        FROM EMPLOYEES
+        WHERE SALARY = (SELECT MAX(SALARY)
+                        FROM EMPLOYEES
+                        );
+
+    Example: (MARKETING DEPARTMENT A KE KE KAJ KORE TADER AVERAGE SALARY KOTO)
+        SELECT AVG(SALARY)
+        FROM EMPLOYEES
+        WHERE DEPARTMENT_ID = (SELECT DEPARTMENT_ID
+                                FROM DEPARTMENTS
+                                WHERE DEPARTMENT_NAME = 'MARKETING'
+                                );
+    Example: (Programmer der peche monthly koto khoros hoi)
+        SELECT SUM(SALARY)
+        FROM EMPLOYEES
+        WHERE JOB_ID = ( SELECT JOB_ID
+                        FROM JOBS
+                        WHERE JOB_TITLE = 'PROGRAMMER'
+                        );
+_____________________________________________________________________________________
+>> Advanced Subquary
+    Example: (second HIGHEST SALARY koto, ke pai?)
+        select *
+        from employees
+        where salary = (
+                        select max(salary)
+                        from employees
+                        where salary < (select max(salary)
+                                        from employees
+                                        )
+                        );
+        
+    Example: KON KON EMPLOYEE tader maneger ar thake salary beshi
+        SELECT * 
+        FROM EMPLOYEES AS EMP
+        WHERE SALARY > (SELECT SALARY
+                        FROM EMPLOYEES AS MGR
+                        WHERE EMP.MANAGER_ID = MGR.EMPLOYEE_ID
+                        )
+
+    Example: kon kon employee tader manager ar moto same job kore?
+        SELECT * 
+        FROM EMPLOYEES AS EMP
+        WHERE JOB_ID = (SELECT JOB_ID
+                        FROM EMPLOYEES AS MGR
+                        WHERE EMP.MANAGER_ID = MGR.EMPLOYEE_ID
+                        );
+
+_____________________________________________________________________________________
+>> Common table expression (with as)
+    WITH TEMP AS 
+    (
+        SELECT *
+        FROM EMPLOYEES
+        LIMIT 5
+    )
+    SELECT *
+    FROM TEMP;
+
+    Example:
+    
+
+        
+
+
+
+_____________________________________________________________________________________

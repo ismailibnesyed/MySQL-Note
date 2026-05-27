@@ -1,0 +1,231 @@
+1. Explain the difference between Primary Key and Foreign Key in SQL?
+Answer:
+    Primary Key:
+        i. Unique identifies each record in a table.
+        ii. Ensures that no two rows have the same value in primary key columns.
+        iii. It cannot contain NULL values.
+
+        Example: In a class or student table student_id must be a primary key because student id must have a unique identifier.
+    Foreign Key:
+        i. Establish a link between two tables.
+        ii. it is a column in one table that refers to Primary Key in another table.
+        iii. Foreign key column must match existing values in the reference in primary key column.
+
+        Example: In a project table, department_id could be a Foreign key referencing department_id primary key in the departments table.
+
+________________________________________________________
+2. What is a Self Join? Provide an example using the employees table to list employees who share the same manager ID, showing only their first names and manager IDs. 
+
+Solution: 
+    - A Self Join in SQL is when a table is joined to itself. Like to compare rows within the same table or find relationships among rows in the table.
+
+    Example:
+        "
+            USE DUMMYDB;
+            
+            SELECT e1.FIRST_NAME AS Employee, e2.MANAGER_ID AS ManagerID, e2.FIRST_NAME AS Colleague
+                    FROM EMPLOYEES AS e1
+                        JOIN EMPLOYEES AS e2
+                        ON e1.MANAGER_ID = e2.MANAGER_ID
+                        AND e1.EMPLOYEE_ID != e2.EMPLOYEE_ID;
+        "
+________________________________________________________
+>> Question 3.1: Create a table of Employees which has the following fields 
+a. Employee_Id 
+b. First Name 
+c. Last Name 
+d. Date of Birth 
+e. Department Id 
+f. Salary
+
+Solution 3.1:
+    "
+        --Solution 3.1:
+        USE ASSIGNMENT;
+        CREATE TABLE Employees(
+            Employee_ID int primary key,
+            First_Name char(50) ,
+            Last_Name char(50),
+            DateOfBirth date,
+            Department_ID int,
+            Salary decimal(10,2)
+        );
+    "
+ 
+Question 3.2: Create a table Projects with the following fields:  
+a. Project ID 
+b. Project Name 
+c. Start Date 
+d. End Date 
+e. Budget 
+
+Solution 3.2:
+    "
+        -- Solution 3.2
+        USE ASSIGNMENT;
+        CREATE TABLE Projects(
+            Project_ID int primary key,
+            Project_Name char(200) ,
+            Start_Date date,
+            End_Date date,
+            Budget int
+        );
+    "
+ 
+Question 3.3: Create a table Employee_Projects with the following fields: 
+a. Employee ID  
+b. Project ID 
+
+Solution: 
+    "
+        -- Solution 3.3
+        USE ASSIGNMENT;
+        CREATE TABLE Employee_Projects(
+            Employee_ID int,
+            Project_ID int,
+            primary key (Employee_ID, Project_ID),
+            foreign key (Employee_ID) references Employees(Employee_ID),
+            foreign key (Project_ID) references Projects(Project_ID)
+        );
+    "
+ 
+[ Note: Ensure that each employee can work on multiple projects and a project can have multiple employees. ]
+________________________________________________________
+>> Question 4: Using the dummydb, write an SQL query to get the third-highest salary in the employees table. 
+
+Solution:
+    "
+        USE dummydb;
+
+        SELECT *
+        FROM employees
+        WHERE salary = (
+                        SELECT MAX(salary)
+                        FROM employees
+                        WHERE salary < (
+                                        SELECT MAX(salary)
+                                        FROM employees
+                                        WHERE salary < (
+                                                        SELECT MAX(salary)
+                                                        FROM employees
+                                                    )
+                                    )
+                    );
+    "
+________________________________________________________
+Question 5: Write a query to show the department names and the number of employees in each department. 
+
+Solution:
+    "
+        USE dummydb;
+
+        SELECT d.Department_Name AS 'Department Name', COUNT(e.Employee_Id) AS 'Number Of Employees'
+        FROM Departments AS d
+        LEFT JOIN Employees AS e
+            ON d.Department_Id = e.Department_Id
+        GROUP BY d.Department_Name;
+    "
+________________________________________________________
+>> Question 6: Illustrate INNER JOIN, LEFT JOIN, RIGHT JOIN, and CROSS JOIN with examples using the employees and departments tables. 
+
+Solution:
+    i. Inner Join: Show only the record that match in both table.
+    
+    Example:
+        
+        "
+            SELECT e.Employee_Id, e.First_Name, d.Department_Name
+            FROM Employees AS e
+            INNER JOIN Departments AS d
+                ON e.Department_Id = d.Department_Id;
+        "
+    ii. LEFT JOIN: Show all record from left table(Employee) and matching record from right table(Department). If no matched then show NULL.
+
+    Example:
+        "
+            SELECT e.Employee_Id, e.First_Name, d.Department_Name
+            FROM Employees AS e
+            LEFT JOIN Departments AS d
+                ON e.Department_Id = d.Department_Id;
+        "
+    iii. Right JOIN: Show all record from right table(department) and matching record from left table(employee). If no matched then show NULL.
+
+    Example:
+        "
+            SELECT e.Employee_Id, e.First_Name, d.Department_Name
+            FROM Employees AS e
+            RIGHT JOIN Departments AS d
+                ON e.Department_Id = d.Department_Id;
+        "
+
+    iv. CROSS Join: Show all record from right table(department) and left table(employee). If no matched then show NULL. All possible combinations.
+
+    Example:
+        "
+            SELECT e.Employee_Id, e.First_Name, d.Department_Name
+            FROM Employees AS e
+            CROSS JOIN Departments AS d;
+        "  
+________________________________________________________
+>> Question 7: What is a Common Table Expression (CTE)? Write an example query using CTE to show the names of employees whose salary is higher than the average salary. 
+
+Solution:
+    - A Common Table Expression (CTE) is a temporary result set in SQL that you can reference within a SELECT, INSERT, UPDATE, or DELETE statement. it makes complex queries easier to read and manage.
+
+    Example:
+
+        "
+            USE dummydb;
+
+            WITH AvgSalary AS (
+                SELECT AVG(Salary) AS AverageSalary
+                FROM Employees
+            )
+            SELECT e.First_Name AS 'First Name' , e.Last_Name AS 'Last Name' , e.Salary AS Salary
+            FROM Employees AS e, AvgSalary AS a
+            WHERE e.Salary > a.AverageSalary;
+        "
+________________________________________________________
+>> Question 8: Write a query to display the names of employees who earn a salary less than the employee "Steven King". 
+
+Solution:
+    "
+        USE dummydb;
+
+        SELECT first_name AS 'First Name', last_name AS 'Last Name', salary
+        FROM EMPLOYEES
+        WHERE salary < (
+            SELECT MAX(salary)
+            FROM EMPLOYEES
+            WHERE first_name = 'Steven' AND last_name = 'King'
+        );
+    "
+________________________________________________________
+>> Question 9: Write a query to find the department names and the names of the managers for each department. 
+
+Solution: 
+    "
+        USE dummydb;
+
+        SELECT d.Department_Name, m.First_Name  AS ManagerFirstName, m.Last_Name AS ManagerLastName
+        FROM Departments AS d
+        LEFT JOIN Employees AS m
+            ON d.Manager_Id = m.Employee_Id;
+    "
+________________________________________________________
+>> Question 10: Write a query to display the names of all cities where departments are located. 
+
+Solution:
+    "
+        USE dummydb;
+
+        SELECT DISTINCT l.City
+        FROM Departments AS d
+        JOIN Locations AS l
+        ON d.Location_Id = l.Location_Id
+        WHERE l.City IS NOT NULL
+        ORDER BY l.City;
+
+    "
+
+

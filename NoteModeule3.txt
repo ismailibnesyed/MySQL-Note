@@ -1,0 +1,132 @@
+Create Table Constraints
+Constraints --> rules
+    Example: NID, ID- unique, Primary Key
+        Age -> 18+
+        email id- unique
+    rules:
+        PRIMARY KEY
+        FOREIGN KEY
+        unique
+        CHECK
+        DEFAULT
+        NOT NULL
+
+
+
+    Student (Roll(Primary key), Name(Not NULL), Email(unique), Address, Age(10+))
+    Library (BookName(Primary KEY), Roll(Forign Key))
+----------------------------------------------------------------------
+SELECT Query (Showing Data)
+-select all data
+    way1:
+        SELECT Roll, Name, Phone, Email, Address
+        FROM Student
+    way2:
+        SELECT *
+        FROM Student
+------------------------------------------------------------
+WHERE Query
+    - zar name Rahim tar sob data show koro
+        SELECT *
+        FROM Student
+        WHERE Name = 'Rahim';
+    - zar Roll 101 tar Phone no koto?
+        SELECT Phone
+        FROM Student
+        WHERE Roll = '104'
+-------------------------------------------------------
+Arithmatic Operator
+=> +, -, *, /, %
+
+    -jar Roll = 103 tar total mark = ?
+    SELECT CSE + means
+    FROM Marks
+    WHERE Roll = '103'
+    - sobar ta dekte chaile
+    SELECT CSE + ME, CSE - ME, (CSE + ME) / 2, CSE % 10
+    FROM Marks
+------------------------------------------------
+Comparison Operator
+=> =, < , >, =<, >=, !=, <>
+    - kar kar age 9 ar theke boro
+        SELECT *
+        FROM Student
+        WHERE Age > 9
+    - age 10 bade baki sob gula dekhaw 
+        SELECT *
+        FROM Student
+        WHERE Age <> 10
+--------------------------------------------
+Logical AND, OR Operator
+=> AND, OR  ------------ In CPP: A  && B, A || B
+    - jader age 30 ar kom kintu salary 12k ar beshi tader name, salary dekhaw
+        SELECT Name, Salary
+        FROM Employee
+        WHERE AGE < 30 AND Salary > 12000;
+    - jader age 25 ar kom othoba salary 12k ar beshi
+        SELECT *
+        FROM Employee
+        WHERE AGE < 25 OR Salary > 12000;
+    - jader salary 12k ar beshi othoba (age 25 ar kom kintu salary 10k ar beshi)
+        SELECT *
+        FROM Employee
+        WHERE Salary > 12000 OR (Age < 25 AND Salary > 10000);
+------------------------------------------------
+DISTINCT, ORDER BY , LIMIT, OFFSET
+DISTINCT -> Alada
+    Giver 1, 2, 2, 4 ,6 , 8, 9, 9
+    = 1,2, 4, 6, 8, 9
+ORDER BY -> Acending, descending
+    Given 1, 7, 2 ,5 ,9 0,
+    ASC = 0, 1, 2, 5, 7, 9, 
+    DESC = 9, 7, 5, 2, 1, 0
+    - Age anoshare Name:
+        SELECT Name
+        FROM Employee
+        ORDER BY Age ASC
+LIMIT -> Given 10 value but we want to see 10 value
+    -
+        SELECT
+        FROM
+        WHERE
+        LIMIT 59, 10 ----prothom 59 bade jabe then 10 ta dekhabe
+    - another way
+        LIMIT 10
+        OFFSET 59  ----prothom 59 bade jabe then 10 ta dekhabe
+
+OFFSET -> Koita bade jabe
+SELECT
+FROM
+WHERE
+ORDER BY
+LIMIT
+OFFSET 
+------------------
+IN, NOT IN, LIKE, AS
+
+IN, NOT IN:
+    SELECT
+    FROM
+    WHERE Roll = 102 OR 104 OR 106
+    WHERE Roll IN (102, 104, 106)
+    WHERE Roll NOT IN (102, 104, 106)
+LIKE:
+    WHERE Name = 'Rahim'
+    WHERE Name LIKE '% Rahim %'
+
+AS: -- AS means Assign as 
+    SELECT Name AS StudentName
+------------------------------------------
+In MySQL, Update and Delete query wasn’t executing, what was the reason and how to run those query? Write the code to enable the feature
+
+=>
+In My SQL if UPDATE or DELETE query aren't executing , common reason is that 'safe update mode is enable'. To run those query we have to disable the safe update mode.
+Code id :
+    SET SQL_SAFE_UPDATES = 0;
+
+
+
+
+
+
+
